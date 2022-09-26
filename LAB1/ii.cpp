@@ -1,19 +1,14 @@
 #include <iostream>
 using namespace std;
+int main( ) {
+	int n;
 
 
-int gcd(int n,int m){
-	if (m == 0){
-		return n;
+	cin >> n;
+	for (int i = 0; i < n; i++){
+		int x;
+		cin >> x;
+
 	}
-	else {
-		return gcd(m,n%m);
-	}
-}
-
-
-int main () {
-	int n,m;
-	cin >> n >> m;
-	cout << gcd(n,m);
+	return  0;
 }
