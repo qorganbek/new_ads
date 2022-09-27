@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 struct NODE
 {
 	int val;
@@ -39,6 +38,23 @@ struct LL
 			current = current->next;
 		}
 	}
+
+	int find_minimum_index(int n){
+		NODE * current = head;
+		int ind = 0;
+		int i = 0;
+		int min = 1e9;
+		while(current != NULL){
+			if(min > abs(n-current->val)){
+				min = abs(n - current->val);
+				ind = i;
+			}
+			i++;
+			current = current->next;
+		}
+		return ind;
+	}
+
 };
 
 
@@ -53,6 +69,6 @@ int main () {
 	}
 	int m;
 	cin >> m;
-	ll.print();
+	cout << ll.find_minimum_index(m);
 	return 0;
 }
