@@ -1,10 +1,13 @@
 #include <iostream>
 using namespace std;
+
+
+
 struct node
 {
     int val;
     node * next;
-    node(int x){
+    node (int x){
         val = x;
         next = NULL;
     }
@@ -14,19 +17,12 @@ struct node
 };
 
 
-struct ll
-{
-    // ll
-};
 
-
-
-
-int main () {
-    node n1(7);
-    node n2(15);
-    node n3(16);
-    node n4(23);
+int main (){
+    node n1(23);
+    node n2(16);
+    node n3(7);
+    node n4(15);
     node n5(27);
     node n6(9);
     node n7(19);
@@ -37,6 +33,7 @@ int main () {
     n4.next = &n5;
     n5.next = &n6;
     n6.next = &n7;
+
 
     node * current = &n1;
 

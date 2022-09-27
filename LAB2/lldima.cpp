@@ -1,58 +1,59 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-struct node{
+struct node
+{
     int val;
     node * next;
     node(int x){
         val = x;
         next = NULL;
     }
-    void print(){
-        cout << val << endl;
-    }
 };
 
-struct ll{
+struct ll
+{
     node * head;
     node * tail;
     ll(){
-       head = NULL; 
-       tail = NULL;
+        head = NULL;
+        tail = NULL;
     }
     void add(int x){
         node * n = new node(x);
-        if(head == NULL){
+        if (head == NULL){
             head = n;
             tail = n;
-        }else{
-            tail->next = n;
+        }
+        else {
+            tail -> next = n;
             tail = n;
         }
     }
     void print(){
         node * current = head;
-        while(current != NULL){
+        while (current != NULL)
+        {
             cout << current->val << " ";
             current = current->next;
         }
     }
 };
 
-int main(){
 
+
+
+int main () {
+    int n;
+    cin >> n;
     ll l;
-    
-
-    for(int i = 1; i <= 10; ++i){
-        l.add(i);
+    for (int i = 0; i < n; i++){
+        int x;
+        cin >> x;
+        l.add(x);
     }
-
-    l.print();
-
-    // node nn(15);
-    // nn.print();
+    int m;
+    cin >> m;
 
     return 0;
 }
