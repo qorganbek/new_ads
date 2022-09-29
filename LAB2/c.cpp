@@ -38,6 +38,24 @@ struct LL
 			current = current->next;
 		}
 	}
+
+
+	void multithread(){
+		LL ans;
+		NODE * cur = head;
+		int i = 0;
+		while (cur)
+		{
+			if (i % 2 == 0){
+				ans.add(cur->val);
+			}
+			i++;
+			cur = cur->next;
+		}
+		ans.print();
+		
+	}
+
 };
 // 1 2 3 4 5
 int main () {
@@ -49,6 +67,6 @@ int main () {
 		cin >> x;
 		ll.add(x);
 	}
-	ll.print();
+	ll.multithread();
 	return 0;
 }
