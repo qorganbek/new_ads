@@ -40,18 +40,26 @@ struct LL
 	}
 
 
-	
-
-	string cyclic_shift(int n){
-		string ans = "";
-		NODE * cur  = head;
+// 0 1 2 3 4
+// 1 2 3 4 5 5 2 3
+	void cyclic_shift(int n, int m){
+		LL ans;
+		NODE * current = head;
 		int i = 0;
-		int size = 0;
-		while (cur != NULL){
-			cout << cur->val;
-			cur = cur->next;
+		while (current)
+		{
+			if (i >= m){
+				ans.add(current->val);
+			}
+			current = current->next;
+			i++;
 		}
-		return ans;	
+		NODE * current2 = head;
+		for (int j = 0; j < m; j++){
+			ans.add(current2->val);
+			current2 = current2->next;
+		}
+		ans.print();
 	}
 
 };
@@ -66,6 +74,6 @@ int main () {
 		cin >> x;
 		l.add(x);
 	}
-	cout << l.cyclic_shift(m);
+	l.cyclic_shift(n,m);
 	return 0;
 }
