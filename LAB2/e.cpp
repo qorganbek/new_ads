@@ -3,6 +3,7 @@ using namespace std;
 
 struct NODE
 {
+    int sum = 0;
     string val;
     NODE * next;
     NODE * prev;
@@ -12,20 +13,44 @@ struct NODE
     }
 };
 
-struct DLL
-{
+void print(NODE * tail){
+    NODE * cur = tail;
+    while (cur)
+    {
+        cout << cur->val << endl;
+        cur = cur->prev;
+    }
+    
+}
+
+
+void rm_duplicate(NODE * head){
+    
+}
+
+int get_cnt(NODE * head){
+    int cnt = 0;
+    NODE * cur = head;
+    while (cur)
+    {
+        cnt++;
+        cur = cur->next;
+    }
+    return cnt;
+}
+
+
+int main () {
+    int n;
+    cin >> n;
     NODE * head;
     NODE * tail;
-    DLL(){
-        head = NULL;
-        tail = NULL;
-    }
-
-    void add(string x){
+    for (int i = 0; i < n; i++){
+        string x;
+        cin >> x;
         NODE * n = new NODE(x);
-        if(head == NULL){
-            head = n;
-            tail = n;
+        if (i == 0){
+            head = tail = n;
         }
         else {
             tail->next = n;
@@ -34,56 +59,8 @@ struct DLL
         }
     }
 
-    void print(){
-        NODE * cur = tail;
-        while (cur)
-        {
-            cout << cur->val << endl;
-            cur = cur->prev; 
-        }
-    }
-};
 
-
-
-int main () {
-    DLL dll;
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++){
-        string x;
-        cin >> x;
-        dll.add(x);
-    }
-    DLL ans;
-    int cnt = 0;
-    NODE * cur = dll.head;    
-    while (cur)
-    {
-        NODE * ans_cur = ans.head;
-        if (ans_cur == NULL){
-            ans.add(cur->val);
-            cnt++;
-        }
-        else {
-            int str = 0;
-            while (ans_cur)
-            {
-                if (cur->val == ans_cur->val){
-                    str++;
-                }
-                ans_cur = ans_cur->next;
-            }
-            if (str == 0){
-                    ans.add(cur->val);
-                    cnt++;
-                }
-        }
-        cur = cur->next;
-    }
-    
-    
-    cout << "All in all: "<< cnt << endl;
+    cout << "All in all: "<< get_cnt(head) << endl;
     cout <<"Students:" << endl;
-    ans.print();
+    print(tail);
 }

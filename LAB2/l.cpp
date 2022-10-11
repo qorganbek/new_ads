@@ -33,7 +33,8 @@ int findMaxSum(int n, Node *head) {
     }
     return max;
 }
-
+// 10
+//5 1 2 -10 5 3 9 -5 10 10
 int main() {
   int n;
   cin >> n;
