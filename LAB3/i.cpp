@@ -9,7 +9,7 @@ bool bs(int a[], int n, int x){
     {
         int m = l + (r - l) / 2;
         if (x < a[m]){
-            r = m -1;
+            r = m - 1;
         }
         else if (x == a[m]){
             return 1;
