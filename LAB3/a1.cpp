@@ -1,7 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+bool have;
 void bs(vector<int> v,int index,int x,int size){
+    if (have){
+        return;
+    }
     int l = 0;
     int r = v.size() - 1;
     if (index % 2 == 0){
@@ -10,6 +13,7 @@ void bs(vector<int> v,int index,int x,int size){
             int m = l + (r - l) / 2;
             if (v[m] == x){
                 cout << index << " " << m << endl;
+                have = true;
                 return;
             }
             else if (v[m] > x){
@@ -26,6 +30,7 @@ void bs(vector<int> v,int index,int x,int size){
             int m = l + (r - l) / 2;
             if (v[m] == x){
                 cout << index << " " << m << endl;
+                have = true;
                 return;
             }
             else if (v[m] > x){
@@ -35,6 +40,9 @@ void bs(vector<int> v,int index,int x,int size){
                 l = m + 1;
             }
         }        
+    }
+    if (size == index){
+        cout << -1 << endl;
     }
 }
 
@@ -57,7 +65,9 @@ int main (){
         }
         v.push_back(row);
     }
+    
     for (int i = 0; i < q; i++){
+        have = false;
         for (int j = 0; j < v.size(); j++){
             bs(v[j],j,a[i],v.size()-1);
         }
