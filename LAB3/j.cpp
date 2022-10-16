@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <cmath>
 using namespace std;
-
 int arrSum(int a[], int n, int k){
     int sum = 0;
     for(int i = 0; i < n; i++){

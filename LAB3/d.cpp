@@ -1,48 +1,52 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <algorithm>
+#include <cmath>
+#include <vector>
 using namespace std;
 
-
-int bs(int a[], int n, int l1 , int r1 , int l2 , int r2){
-    int cnt = 0;
-    int l = 0;
-    int r = n - 1;
-    while (l <= r)
-    {
-        int m = l + (r - l) / 2;
-        if (a[m] > r1){
-            r = m - 1;
+int binary_search(vector<int> &v, bool ok, int x, int l, int r){
+    int mid = l + ((r - l)/2);
+    if(ok){
+        if(l > r) return 0;
+        if(x <= v[mid]){
+            if(mid == 0) return -1;
+            if(v[mid-1] < x) return mid- 1;
+            return binary_search(v, true, x, l, mid - 1);
         }
-        else if (a[m] < l1){
-            l = m + 1;
-        }
-        else if (a[m] >= l1 && r1 >= a[m]){
-            cnt = m + 1;
-            break;
+        else{
+            if(x <= v[mid+1]) return mid;
+            return binary_search(v, true, x, mid + 1, r);
         }
     }
-    return cnt;
+    else{
+        if(x >= v[mid]){
+            if(mid == v.size()-1) return v.size(); 
+            if(x < v[mid+1]) return mid + 1;
+            return binary_search(v, false, x, mid + 1, r);
+        }
+        else{
+            if(x > v[mid-1]) return mid;
+            return binary_search(v, false, x, l, mid - 1);
+        }
+    }
 }
-//1 2 3 5 8 13 23    1 5
-// cnt  = 4;
-// 
 
-
-
-
-
-int main (){
-    int n,q;
-    cin >> n >> q;
-    int a[n];
-    for (int i = 0; i < n; i++){
-        cin >> a[i];
-    }
-    sort(a,a+n);
-    for (int i = 0; i < q; i++){
-        int l1, r1 , l2 , r2;
+int main(){
+    int n, m;
+    cin >> n >> m;
+    vector<int> v(n);
+    for(int i = 0; i < n; i++) cin >> v[i];
+    sort(v.begin(), v.end());
+    for(int i = 0; i < m; i++){
+        int l1, r1, l2, r2;
         cin >> l1 >> r1 >> l2 >> r2;
-        cout << bs(a,n,l1,r1,l2,r2);
-        cout << "\n"; 
+        int sum = 0;
+        sum += binary_search(v, false, r1, 0, v.size()-1) - binary_search(v, true, l1, 0, v.size()-1) - 1;
+        sum += binary_search(v, false, r2, 0, v.size()-1) - binary_search(v, true, l2, 0, v.size()-1) - 1;
+        int mx = max(l1, l2);
+        int mn = min(r1, r2);
+        if(mx < mn) sum -= (binary_search(v, false, mn, 0, v.size()-1) - binary_search(v, true, mx, 0, v.size()-1) - 1);
+        
+        cout << sum << endl;
     }
-    return 0;
 }
