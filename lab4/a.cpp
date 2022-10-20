@@ -28,6 +28,10 @@ struct bst{
         this->print(this->root);
     }
 
+    bool check(string s){
+        return this->check(root,s);
+    }
+
     private:
     node * root;
     node * add(node * current, int x){
@@ -56,23 +60,32 @@ struct bst{
         }
     }
 
-    
 
+
+    bool check(node * cur, string s){
+        for (int i = 0; i < s.size(); i++){
+            if (s[i] == 'L') cur = cur->left;
+            else cur = cur->right;
+            if (cur == NULL) return false;
+        }
+        return true;
+    }
 };
 
 
 int main(){
-
-    int a[] = {10, 11, 8, 5, 4, 12};
-    int n = sizeof(a) / sizeof(int);
-
+    int n, m, x;
+    cin >> n >> m;
     bst * b = new bst();
-
-    for(int i = 0; i < n; ++i){
-        b->add(a[i]);
+    for (int i = 0; i < n; i++){
+        cin >> x;
+        b->add(x);
     }
-
-    b->print();
-
+    string s;
+    for (int i = 0; i < m; i++){
+        cin >> s;
+        string res = b->check(s) ? "YES" : "NO";
+        cout << res << endl;
+    }
     return 0;
 }

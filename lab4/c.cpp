@@ -28,6 +28,14 @@ struct bst{
         this->print(this->root);
     }
 
+    int check(int s){
+        return this->check(root,s);
+    }
+
+    int _get_size(){
+        return this->_get_size(this->root);
+    }
+
     private:
     node * root;
     node * add(node * current, int x){
@@ -56,23 +64,31 @@ struct bst{
         }
     }
 
-    
+    int _get_size(node * cur){
+        if (cur == NULL) return 0;
+        return _get_size(cur->left) + _get_size(cur->right) + 1;
+    }
 
+    int check(node * cur, int s){
+        if (cur == NULL) return -1;
+        if (cur->val == s) return _get_size(cur);
+        else if (cur->val > s) return check(cur->left,s);
+        else if (cur->val < s) return check(cur->right,s);
+    }
 };
 
 
 int main(){
-
-    int a[] = {10, 11, 8, 5, 4, 12};
-    int n = sizeof(a) / sizeof(int);
-
+    int n, x;
+    cin >> n;
     bst * b = new bst();
-
-    for(int i = 0; i < n; ++i){
-        b->add(a[i]);
+    
+    for (int i = 0; i < n; i++){
+        cin >> x;
+        b->add(x);    
     }
-
-    b->print();
+    cin >> x;
+    cout << b->check(x);
 
     return 0;
 }
