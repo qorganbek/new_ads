@@ -4,6 +4,7 @@ using namespace std;
 
 struct node{
     int val;
+    int size=1;
     node * left;
     node * right;
     int cnt;
@@ -31,9 +32,9 @@ struct bst{
     }
 
 
-    void solve (int x){
-        node * n = search(x);
-        print(n);
+    void solve (){
+        get_size(this->root);
+        cout << root->val << " " << root->size;
     }
 
     private:
@@ -57,6 +58,9 @@ struct bst{
         return current;
     }
 
+    void fix_arr(int a[],int size){
+
+    }
 
     node * search(int x,node * cur){
         if (cur == NULL) return NULL;
@@ -72,6 +76,22 @@ struct bst{
         print(cur->right);
     }
 
+    void give_size(node * cur){
+        if (cur != NULL){
+            give_size(cur->left);
+            cur->size = get_size(cur);
+            give_size(cur->right);
+        }
+    }
+
+
+    int get_size(node * n){
+        if (n == NULL){
+            return 0;
+        }
+        return get_size(n->left) + get_size(n->right) + 1;
+    }
+
 };
 
 
@@ -81,12 +101,11 @@ int main(){
     int n, x;
     cin >> n;
     bst * b = new bst();
-    
+
     for (int i = 0; i < n; i++){
         cin >> x;
         b->add(x);    
     }
-    cin >> x;
-    b->solve(x);
+    b->solve();
     return 0;
 }

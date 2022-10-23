@@ -32,9 +32,9 @@ struct bst{
         return this->check(root,s);
     }
 
-    int _get_size(){
-        return this->_get_size(this->root);
-    }
+    // int _get_size(){
+    //     return this->_get_size(this->root);
+    // }
 
     private:
     node * root;
