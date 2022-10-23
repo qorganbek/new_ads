@@ -1,111 +1,124 @@
-#include <iostream>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-struct node{
+struct node
+{
+    /* data */
     int val;
-    int size=1;
-    node * left;
-    node * right;
-    int cnt;
+    node *right, *left;
     node(int val){
         this->val = val;
         this->left = this->right = NULL;
     }
 };
 
-struct bst{
+struct bst
+{
+
     public:
+
+
+    int getHeight(node* cur) {
+		if (!cur) return 0;
+		int left = getHeight(cur->left);
+		int right = getHeight(cur->right);
+		return max(left, right) + 1;
+	}
+
+    node * getRoot(){
+        return root;
+    }
+
     bst(){
         root = NULL;
     }
+
+
+    void print(){
+        this->print(this->root);
+    }
+
     void add(int x){
-        node * result = this->add(this->root, x);
-        if(root == NULL){
-            root = result;
+        node * res = this->add(this->root,x);
+        if (root == NULL){
+            root = res;
         }
     }
 
-
-    node * search(int x){
-        return this->search(x,this->root);
+    int getSize(){
+        return this->getSize(this->getRoot());
     }
 
-
-    void solve (){
-        get_size(this->root);
-        cout << root->val << " " << root->size;
-    }
-
+    /* data */
     private:
     node * root;
-    node * add(node * current, int x){
-        if(current == NULL){
-            current = new node(x);
-        }else if(current->val > x){
-            if(current->left == NULL){
-                current->left = add(current->left, x);
-            }else{
-                add(current->left, x);
-            }
-        }else if(current->val < x){
-            if(current->right == NULL){
-                current->right = add(current->right, x);
-            }else{
-                add(current->right, x);
-            }
+
+    int getSize(node * cur){
+        if (cur == NULL) return 0;
+        return getSize(cur->left) + getSize(cur->right) + 1;
+    }
+
+
+    node  * add(node * cur, int x){
+        if(cur == NULL){
+            cur = new node(x);
         }
-        return current;
+        else if (cur->val > x){
+            if (cur->left == NULL){
+                cur->left = add(cur->left,x);
+            }
+            else add(cur->left,x);
+        }
+        else if (cur->val < x){
+            if (cur->right == NULL){
+                cur->right = add(cur->right,x);
+            }
+            else add(cur->right,x);
+        }
+        return cur;
     }
 
-    void fix_arr(int a[],int size){
-
-    }
-
-    node * search(int x,node * cur){
-        if (cur == NULL) return NULL;
-        if (cur->val  == x) return cur;
-        else if (cur->val > x) return search(x,cur->left);
-        else return search(x,cur->right);
-    }
 
     void print(node * cur){
-        if (!cur) return;
-        cout << cur->val << " ";
-        print(cur->left);
-        print(cur->right);
-    }
-
-    void give_size(node * cur){
         if (cur != NULL){
-            give_size(cur->left);
-            cur->size = get_size(cur);
-            give_size(cur->right);
+            print(cur->left);
+            cout << cur->val << " ";
+            print(cur->right);
         }
-    }
-
-
-    int get_size(node * n){
-        if (n == NULL){
-            return 0;
-        }
-        return get_size(n->left) + get_size(n->right) + 1;
     }
 
 };
 
+void sum_level(int level, vector<int> &v, node * cur){
+    if (cur == NULL){
+        return;
+    }    
+    v[level] += cur->val;
+    sum_level(level+1,v,cur->left);
+    sum_level(level+1,v,cur->right);
+}
 
-int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int n, x;
+int main (){
+    bst * tree = new bst();
+    int n;
     cin >> n;
-    bst * b = new bst();
-
     for (int i = 0; i < n; i++){
+        int x;
         cin >> x;
-        b->add(x);    
+        tree->add(x);
     }
-    b->solve();
+    
+    int level = tree->getHeight(tree->getRoot());
+    vector <int> v(level);
+
+    cout << endl;
+
+    sum_level(0,v,tree->getRoot());
+
+    cout << v.size() << "\n";
+    for (int i = 0; i < v.size(); i++){
+
+        cout << v[i] << " ";
+    }
     return 0;
 }
