@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-int cnt = 0;
 struct node
 {
     int val;
@@ -24,25 +23,16 @@ struct bst
                 else if (cur->val < x){
                     if (cur->right == NULL) cur->right = add(cur->right,x);
                     else add(cur->right,x);
-                }  
-                return cur;           
+                }
+                return cur;             
             }
 
             void print(node * cur){
                 if (cur != NULL){
-                    
-                    cout << cur->val << " ";
                     print(cur->left);
+                    cout << cur->val << " ";
                     print(cur->right);
                     
-                }
-            }
-
-            void print_mini_triangle(node * cur){
-                if (cur != NULL){
-                    print_mini_triangle(cur->left);
-                    if (cur->left != NULL and cur->right != NULL ) cnt++;
-                    print_mini_triangle(cur->right);
                 }
             }
 
@@ -58,10 +48,6 @@ struct bst
         void print(){
             print(this->root);
         }
-
-        void print_mini_triangle(){
-            this->print_mini_triangle(this->root);
-        }
 };
 
 
@@ -74,7 +60,5 @@ int main(){
         cin >> x;
         tree->add(x);
     }
-    tree->print_mini_triangle();
-    cout << cnt;
     return 0;
 }

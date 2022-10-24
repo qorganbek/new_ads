@@ -41,7 +41,7 @@ struct bst
                 if (cur != NULL){
                     print_mini_triangle(cur->left);
                     cnt++;
-                    // print_mini_triangle(cur->right);
+                    print_mini_triangle(cur->right);
                     
                 }
             }

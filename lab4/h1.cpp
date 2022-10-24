@@ -24,7 +24,8 @@ struct bst
                 else if (cur->val < x){
                     if (cur->right == NULL) cur->right = add(cur->right,x);
                     else add(cur->right,x);
-                }             
+                }
+                return cur;             
             }
 
             void print(node * cur){
