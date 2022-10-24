@@ -71,7 +71,6 @@ struct bst{
         print(cur->left);
         print(cur->right);
     }
-
 };
 
 
