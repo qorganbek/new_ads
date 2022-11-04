@@ -30,19 +30,23 @@ int main (){
     for (int i = 0; i < n; i++){
         cin >> a[i];
     }
-    for (int i = 0; i < n; i++){
-        if (a[i] == 'a' or a[i] == 'e' or a[i] == 'u' or a[i] == 'i' or a[i] == 'o'){
-            a[i] -= 32;
-        }
-    }    
+    char my_char;
+    
+    cin >> my_char;
+
     qsort(a,0,n-1);
+    
+    if (a[n-1] == my_char){
+        cout << a[0];
+        return 0;
+    }
+    
     for (int i = 0; i < n; i++){
-        if (a[i] + 32 == 'a' or a[i] + 32 == 'e' or a[i] + 32 == 'u' or a[i] + 32 == 'i' or a[i] + 32 == 'o'){
-            a[i] += 32;
+
+        if (a[i] > my_char){
+            cout << a[i];
+            return 0;
         }
-    }     
-    for (int i = 0; i < n; i++){
-        cout << a[i];
     }
     return 0;
 }
