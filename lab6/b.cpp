@@ -1,6 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <set>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -8,51 +6,65 @@ int partition(vector<int> &a, int low, int high){
     int i = low - 1;
     int pivot = high;
     for (int j = low; j < high; j++){
-        if (a[j] < a[pivot]){
+        if(a[j] < a[pivot]){
             i++;
-            swap(a[j],a[i]);
+            swap(a[i],a[j]);
         }
     }
-    swap(a[pivot],a[i + 1]);
+    swap(a[i+1],a[pivot]);
     return i + 1;
 }
 
 void qsort(vector<int> &a, int low, int high){
-    if (low < high){
+    if(low < high){
         int pivot = partition(a,low,high);
-        qsort(a,low,pivot - 1);
-        qsort(a,pivot + 1,high);
+        qsort(a,low,pivot-1);
+        qsort(a,pivot+1,high);
     }
 }
 
 int main (){
-    vector<int> v;
+    map<int, int> f;
+    map<int, int> s;
     int n, m;
-    set<int> b;
     cin >> n >> m;
-    int a[n];
     for (int i = 0; i < n; i++){
-        cin >> a[i];
+        int x;
+        cin >> x;
+        f[x]++;
     }
 
     for (int i = 0; i < m; i++){
         int x;
         cin >> x;
-        b.insert(x);
-    }   
-    vector<int> s2(b.begin(),b.end());
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < m; j++){
-            if (a[i] == s2[j]){
-                v.push_back(a[i]);
+        s[x]++;
+    }
+
+    map<int,int>::iterator it_f, it_s;
+    
+    vector<int> ans;
+    for (it_f = f.begin(); it_f != f.end(); it_f++){
+        for (it_s = s.begin(); it_s != s.end(); it_s++){
+            if ((*it_f).first == (*it_s).first){
+                if((*it_f).second == (*it_s).second){
+                    for(int i = 0; i < (*it_f).second; i++){
+                        ans.push_back((*it_f).first);
+                    }
+                }
+                else {
+                    for(int i = 0; i < min((*it_f).second,(*it_s).second); i++){
+                        ans.push_back((*it_f).first);
+                    } 
+                }
             }
-        }
-    }
-    qsort(v,0,v.size()-1);
-
-    for (int i = 0; i < v.size(); i++){
-        cout << v[i] << " ";
+        
+        }     
     }
 
+    qsort(ans,0,ans.size()-1);
+
+    for (int i = 0; i < ans.size(); i++){
+        cout << ans[i] << " ";
+    }
     return 0;
 }
