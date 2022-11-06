@@ -79,8 +79,8 @@ int main (){
 	for (int i = 0; i < n; i++){
 		hp.add(a[i]);
 	}
-
-	cout << hp.get_len() << endl;
-	cout << hp.get_min();
+	hp.print();
+	// cout << hp.get_len() << endl;
+	// cout << hp.get_min();
 	return 0;
 }
