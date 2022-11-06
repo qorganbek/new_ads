@@ -34,13 +34,13 @@ int main(){
     vector<int> ans;
     int mini = 1e9;
     //o(n^2)
-    for (int i = 0; i < n - 1; i++){
-        for (int j = i + 1; j < n; j++){
-            if (abs(a[i] - a[j]) < mini){
-                mini = abs(a[i] - a[j]);
-            }
+    for (int i = 0; i < n; i++){
+        if (a[i] < 0){
+            a[i] *= -1;
         }
     }
+
+
     //o(n^2)
     for (int i = 0; i < n - 1; i++){
         for (int j = i + 1; j < n; j++){

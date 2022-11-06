@@ -26,7 +26,7 @@ void qsort(int * a, int low, int high){
 
 int main(){
 
-    int a[] = {-20, -3916237, -357920, -362060, 30, 6246457};
+    int a[] = {20, 3916237, 357920, 362060, 30, 6246457};
     int n = sizeof(a)/sizeof(int);
 
     qsort(a, 0, n - 1);
