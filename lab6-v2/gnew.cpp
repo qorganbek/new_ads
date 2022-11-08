@@ -17,29 +17,27 @@ void setMarks(){
 
 }
 
+bool cmp(pair<pair<string,string> ,double> a, pair<pair<string,string> ,double> b){
+    if (a.second == b.second){
+        if (a.first.first == b.first.first){
+            if (a.first.second == b.first.second) return true;
+            return a.first.second < b.first.second;
+        }
+        return a.first.first < b.first.first;
+    }
+    return a.second < b.second;
+}
 
 int partition(pair<pair<string,string> ,double> *a, int low , int high){
     int i = low - 1;
-    int pivot = high;
+    pair<pair<string,string> ,double> pivot = a[high];
     for (int j = low; j < high; j++){
-        if (a[j].second < a[pivot].second){
+        if (cmp(a[j],pivot)){
             i++;
-            swap(a[j],a[i]);
-        }
-        else if (a[j].second == a[pivot].second){
-            if (a[j].first.first < a[pivot].first.first){
-                i++;
-                swap(a[i],a[j]);
-            }
-            else if(a[j].first.first == a[pivot].first.first){
-                if(a[j].first.second < a[pivot].first.second){
-                    i++;
-                    swap(a[i],a[j]);
-                }
-            }
+            swap(a[i],a[j]);
         }
     }
-    swap(a[i+1], a[pivot]);
+    swap(a[i+1], a[high]);
     return i + 1;
 }
 

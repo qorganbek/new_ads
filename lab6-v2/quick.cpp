@@ -5,7 +5,6 @@ bool cmp(pair<pair<string, string>, double> a, pair<pair<string, string>, double
     if(a.second == b.second){
         if(a.first.first == b.first.first){
             if(a.first.second == b.first.second) return true;
-            return a.first.second < b.first.second;
         }
         return a.first.first < b.first.first;
     }

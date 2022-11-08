@@ -24,6 +24,8 @@ int main (){
 
     map<string,string> m(a.begin(),a.end());
     map<string,string>::iterator it;
+
+    cout << m.size() << endl;
     for (it = m.begin(); it != m.end(); it++){
         cout << (*it).first << " " << (*it).second << endl;
     }
