@@ -41,10 +41,10 @@ void merge(int * a, int l1, int r1, int l2, int r2){
 
 void msort(int * a, int l, int r){
     if(l < r){
-        int m = l + (r - l) / 2;
-        msort(a, l, m);
-        msort(a, m + 1, r);
-        merge(a, l, m , m + 1, r);
+        int m = r - (r - l) / 2;
+        msort(a, l, m - 1);
+        msort(a, m, r);
+        merge(a, l, m - 1 , m, r);
     }
 }
 
