@@ -1,37 +1,48 @@
 #include <bits/stdc++.h>
+
+#define ll long long
+
 using namespace std;
 
-long long f(string s){
-
+ll f(string s){
     size_t n = s.size();
-    long long p[n];
-    long long q = 1e9 + 7;
+    ll p[n];
+    ll q = 1e9 + 7;
     p[0] = 1;
     for(size_t i = 1; i < n; i++){
         p[i] = (p[i - 1] * 11) % q;
     }
-    long long h = 0;
+    ll num = 0;
     for(size_t i = 0; i < n; i++){
-        h = (h + ((s[i] - 47) * p[i]) % q) % q;
+        num = (num + ((s[i] - 47) * p[i]) % q) % q;
     }
-    return h;
+    return num;
 }
+
+
 
 int main(){
     int n;
+
     cin >> n;
+    
     int k = 2 * n;
-    string arr[k];
-    set<string> st;
+    
+    string a[k];
+    
+    set<string> s;
+    
     for(int i = 0; i < k; i++){
-        cin >> arr[i];
-        st.insert(arr[i]);
+        cin >> a[i];
+        s.insert(a[i]);
     } 
+
     int cnt = 0;
+    
     for(int i = 0; i < k; i++){
-        string h = to_string(f(arr[i]));
-        if(st.find(h) != st.end()){
-                cout << "Hash of string \"" << arr[i] << "\" is " << h << "\n"; 
+        string num = to_string(f(a[i]));
+        if(s.find(num) != s.end()){
+                cout << "Hash of string \"" << a[i] << "\" is " << num << "\n"; 
                 cnt ++;
             }
         if(cnt == n){

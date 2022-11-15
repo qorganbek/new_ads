@@ -1,31 +1,37 @@
 #include <bits/stdc++.h>
+
+#define ll long long
+
 using namespace std;
 
-void h(long long n, long long * a){
+void f(ll n, ll * a){
     string s = "";
-    long long d;
-    long long q = LONG_LONG_MAX;
-    for(int i = 0; i < n; i++){
+    
+    ll dp;
+
+    ll qd = LONG_LONG_MAX;
+    
+    for(ll i = 0; i < n; i++){
         if(i == 0){
             s += char(a[i] + 97); 
         }
         if(i > 0){
-            d = (a[i] % q) - (a[i - 1]) % q;
-            d = d / pow(2, i); 
-            s += char((d + 97));
+            dp = (a[i] % qd) - (a[i - 1]) % qd;
+            dp = dp / pow(2, i); 
+            s += char((dp + 97));
         }
     }
-    cout<<s;
+    cout << s;
 }
 
 int main(){
-    long long n;
+    ll n;
     cin >> n;
-    long long a[n];
-    for(size_t i = 0; i < n; i++){
-        long long  x;
-        cin>>x;
+    ll a[n];
+    for(size_t i = 0; i < n; ++i){
+        ll x;
+        cin >> x;
         a[i] = x;
     }
-    h(n, a);
+    f(n, a);
 }

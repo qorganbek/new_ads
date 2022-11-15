@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-
+long long cnt = 0;
 void f(string t, string s){
     size_t n = t.size();
     size_t m = s.size();
@@ -33,20 +33,20 @@ void f(string t, string s){
             d -= h[i-1];
         }
         if( d == h_s * p[i]  && t.substr(i, m) == s){
-            cout << "found " << i << endl;
+            cnt++;
         }
     }
 
 }
 
 int main(){
-    cout << (1 << 30) + 1;
-    // string text, pattern;
-    // getline(cin, text);
-    // getline(cin, pattern);
+	long long n;
+    string text, pattern;
+    cin >> pattern >> n >> text;
+    f(text, pattern);
 
-    // f(text, pattern);
-
+    string res = cnt > n ? "YES" : "NO";
+    cout << res;
 
     return 0;
 }

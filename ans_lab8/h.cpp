@@ -87,7 +87,7 @@ int main(){
     for(int i = 0; i < n; i++)cin >> s[i];
     for(int i = 0; i < n; i++){
         for(int j = 0; j < s[i].size(); j++){
-            s[i][j] -= 'a'-1;
+            s[i][j] -= 'a' - 1;
         }
     }
     
