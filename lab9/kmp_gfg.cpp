@@ -2,7 +2,7 @@
 
 using namespace std;
 
-vector<size_t> kmp(string s){
+vector <size_t> kmp(string s){
     size_t n = s.size();
     vector<size_t> v(n);
     for (int i = 1; i < n; i++){
@@ -21,16 +21,16 @@ vector<size_t> kmp(string s){
 
 
 int main(){
-    string text = "sdjdimanadndim";
-    string pattern = "dima";
-    string str = pattern + '#' + text;
-    vector<size_t> v = kmp(str);
+    string text = "bcabcab";
+    // string pattern = "bcabcab";
+    // string str = pattern + '#' + text;
+    vector<size_t> v = kmp(text);
     for(int i = 0; i < v.size(); i++){
-        if(v[i] == pattern.size()){
-            cout << "found!";
-            return 0;
-        }
+        // if(v[i] == pattern.size()){
+            cout <<v[i]  << " ";
+        //     return 0;
+        // }
     }
-    cout << "not found!";
+    // cout << "not found!";
     return 0;
 }

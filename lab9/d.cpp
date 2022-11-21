@@ -1,43 +1,54 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-vector<size_t> f(string str){
-    size_t n = str.size();
-    vector<size_t> v(n);
-    v[0] = 0;
-    for(size_t i = 1; i < n; ++i){
-        size_t j = v[i - 1];
-        while(j > 0 && str[j] != str[i]){
+vector<int> kmp(string s){
+    int n = s.size();
+    vector<int> v(n);
+    for(int i = 1; i < n; i++){
+        int j = v[i-1];
+        while (j > 0 && s[j] != s[i])
+        {
             j = v[j-1];
         }
-        if(str[i] == str[j]){
+        if(s[i] == s[j]){
             v[i] = j + 1;
         }
     }
-
     return v;
 }
-
+//tauemel#kokshetau
 int main(){
-
-    string pattern;
-    string text;
-    getline(cin, pattern);
-    getline(cin, text);
-
-    string str = pattern + '#'  + text;
-
-    vector<size_t> v = f(str);
-    for(int i = 0; i < v.size(); ++i){
-        if(v[i] == pattern.size()){
-            cout << "found!";
-            return 0;
+    int max = 0;
+    vector< pair<int,string> > ans;
+    string s; cin >> s;
+    s[0] += 32;
+    int n; cin >> n;
+    for(int i = 0; i < n; i++){
+        string x; cin >> x;
+        x[0] += 32;
+        vector<int> v = kmp(x + '#' + s);
+        x[0] -= 32; 
+        if(max < v[v.size()-1]) max = v[v.size()-1];
+        for(int j = v.size()-1; j >= 0; j--){
+            if(v[j] == v[v.size()-1] && v[v.size()-1] != 0){
+                ans.push_back(make_pair(v[j], x));
+            }
         }
     }
 
-    cout << "not found!";
+    vector<string> solve;
+    for(int i = 0; i < ans.size(); i++){
+        if(max == ans[i].first){
+            solve.push_back(ans[i].second);
+        }
+    }
+
+    cout << solve.size() << endl;
+    for(int i = 0; i < ans.size(); i++){
+        cout << solve[i] << endl;
+    }
+    
 
     return 0;
 }
