@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 vector<int> kmp(string s){
     int n = s.size();
     vector<int> v(n);
@@ -18,7 +17,6 @@ vector<int> kmp(string s){
     }
     return v;
 }
-
 
 bool check(string s, string x){
     vector<int> v = kmp(x + '#' + s);

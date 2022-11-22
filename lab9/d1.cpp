@@ -30,9 +30,11 @@ int main(){
         vector<int> v = kmp(x + '#' + s);
         x[0] -= 32; 
         int m = 0;
-        if(m <= v[v.size()-1]){
-            ans.push_back(make_pair(v[v.size()-1], x));
-            m = v[v.size()-1];
+        if(m <= v[v.size()-1]) m = v[v.size()-1];
+        for(int j = v.size()-1; j >= 0; j--){
+            if(v[j] == v[v.size()-1] && v[v.size()-1] != 0){
+                ans.push_back(make_pair(v[j], x));
+            }
         }
         if(max < m) max = m;
     }
