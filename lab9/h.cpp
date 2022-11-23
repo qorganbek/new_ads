@@ -1,30 +1,35 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+typedef long long ll;
 
-vector<size_t> kmp(string s){
-    size_t n = s.size();
-    vector<size_t> v(n);
-    for(size_t i = 1; i < n; i++){
-        size_t j = v[i-1];
-        while (j > 0 && s[i] != s[j]) 
-        {
-            j = v[j-1];
-        }
-        if(s[i] == s[j]){
-            v[i] = j + 1;
-        }
+vector<ll> l(string s){
+
+vector<ll> p(s.size(), 0);
+
+for(ll i = 1; i < s.size(); i++){
+    ll j = p[i-1];
+    while(j > 0 && s[i] != s[j])j = p[j-1];
+    if(s[i] == s[j]){
+        j++;
     }
-    return v;
+    p[i] = j;
 }
+
+return p;
+}
+
+
 
 int main(){
     string s;
-    int cnt = 0;
     cin >> s;
-    vector<size_t> v = kmp(s);
-    for(int i = 0; i < v.size(); i++){
-        cout << v[i] << " ";
+    vector<ll> p = l(s);
+    int cnt = 0;
+    for(int i = 1; i < s.size() - 1; i += 2){
+        if((i + 1) % (i + 1 - p[i]) == 0 && (( i + 1) / (i + 1 - p[i]) ) % 2 == 0){
+            cnt++;
+        }
     }
-    return 0;
+
+    cout << cnt;
 }

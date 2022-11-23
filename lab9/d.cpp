@@ -17,7 +17,8 @@ vector<int> kmp(string s){
     }
     return v;
 }
-//tauemel#kokshetau
+//tauemel#kokshetau\
+//00012315646545123
 int main(){
     int max = 1;
     vector< pair<int,string> > ans;
