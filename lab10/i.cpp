@@ -1,24 +1,28 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-vector < vector <int>> v; 
+vector <vector<int>> v; 
 vector <int> check;
 
-vector <int> ans (queue <int> q, vector <bool> visited){
+vector <int> ans (queue <int> q, vector <bool> vis){
     vector <int> answ;
     while(!q.empty()){
         int cur = q.front();
         q.pop();
-        visited[cur] = true;
+        vis[cur] = true;
         answ.push_back(cur);
         for(auto it: v[cur]){
-            if(not visited[it]){
+            if(not vis[it]){
                 check[it]--;
                 if(check[it] == 0){
                     q.push(it);
                 }
             }
         }
+
+
+
     }
     return answ; 
 }
@@ -40,15 +44,16 @@ int main(){
             q.push(i);
         }
     }
-    vector <bool> visited(n + 1, 0);
-    vector <int> answer = ans(q, visited);
+    vector <bool> vis(n + 1, 0);
+    vector <int> answer = ans(q, vis);
     if(answer.size() < n){
-        cout << "Impossible" << "\n";
+        cout << "Impossible" << endl;
     }
     else {
-        cout << "Possible" << "\n";
+        cout << "Possible" << endl;
         for(int i = 0; i < n; i++){
             cout << answer[i] << " ";
         }
     }
+    return 0;
 }
