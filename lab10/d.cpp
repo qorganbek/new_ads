@@ -2,8 +2,8 @@
 
 using namespace std;
 
-int a[5000][5000];
-int d[5000][5000];
+int a[5001][5001];
+int d[5001][5001];
 vector<int> red;
 
 vector<int> get_path(int v, int n){
